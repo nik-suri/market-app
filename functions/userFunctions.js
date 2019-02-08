@@ -1,4 +1,7 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+
+const db = admin.firestore();
 
 // Add new user to database
 exports.newUser = functions.auth.user().onCreate(user => {
