@@ -8,5 +8,7 @@ const groupFunctions = require('./groupFunctions');
 
 //User Functions
 exports.newUser = userFunctions.newUser;
-exports.addRegistrationToken = userFunctions.addRegistrationToken;
 exports.userLogin = userFunctions.userLogin;
+exports.userLogout = userFunctions.userLogout;
+
+exports.createGroup = groupFunctions.createGroup;
