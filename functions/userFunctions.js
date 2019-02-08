@@ -25,3 +25,13 @@ exports.userLogin = functions.https.onCall((data, context) => {
     }
   })
 });
+
+exports.userLogout = functions.https.onCall((data, context) => {
+  const deviceID = data.deviceID;
+  const uid = conext.auth.uid;
+
+  var userNotifIDs = db.collection('userNotificationIDs').doc(uid);
+  userNotifIDs.update({
+    deviceID: firebase.firestore.FieldValue.delete();
+  });
+});
