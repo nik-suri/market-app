@@ -32,6 +32,6 @@ exports.userLogout = functions.https.onCall((data, context) => {
 
   var userNotifIDs = db.collection('userNotificationIDs').doc(uid);
   userNotifIDs.update({
-    deviceID: firebase.firestore.FieldValue.delete();
+    deviceID: firebase.firestore.FieldValue.delete()
   });
 });
