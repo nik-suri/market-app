@@ -1,5 +1,4 @@
 const functions = require('firebase-functions');
-const db = require('./setup.js');
 
 // Add new user to database
 exports.newUser = functions.auth.user().onCreate(user => {
@@ -17,12 +16,12 @@ exports.addRegistrationToken = functions.https.onCall((data, context) => {
 });
 
 // Save Device ID
-exports.userLogIn = functions.https.onCall((data, context) => {
+exports.userLogin = functions.https.onCall((data, context) => {
     const deviceID = data.deviceID;
     const deviceOS = data.deviceOS;
     const date = Date.now()
     const uid = context.auth.uid;
-    
+
     db.collection('userNotifcationIDs').doc(uid).update({
         deviceID: {
             "OS": deviceOS,
