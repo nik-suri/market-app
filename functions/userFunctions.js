@@ -20,10 +20,10 @@ exports.addRegistrationToken = functions.https.onCall((data, context) => {
 
 // Save Device ID
 exports.userLogin = functions.https.onCall((data, context) => {
-    const deviceID = data.deviceID;
-    const deviceOS = data.deviceOS;
-    const date = Date.now()
-    const uid = context.auth.uid;
+  const deviceID = data.deviceID;
+  const deviceOS = data.deviceOS;
+  const uid = context.auth.uid;
+  const date = (new Date()).toISOString();
 
     db.collection('userNotifcationIDs').doc(uid).update({
         deviceID: {
