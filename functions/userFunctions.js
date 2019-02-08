@@ -18,7 +18,7 @@ exports.userLogin = functions.https.onCall((data, context) => {
   const uid = context.auth.uid;
   const date = (new Date()).toISOString();
 
-  db.collection('userNotifcationIDs').doc(uid).update({
+  db.collection('userNotifcationIDs').doc(uid).set({
     deviceID: {
       "OS": deviceOS,
       "date": date
