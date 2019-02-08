@@ -25,11 +25,25 @@ exports.userLogin = functions.https.onCall((data, context) => {
   const uid = context.auth.uid;
   const date = (new Date()).toISOString();
 
-    db.collection('userNotifcationIDs').doc(uid).update({
-        deviceID: {
-            "OS": deviceOS,
-            "date": date
-        }
-    })
+  db.collection('userNotifcationIDs').doc(uid).update({
+    deviceID: {
+        "OS": deviceOS,
+        "date": date
+    }
+  })
+
+});
+
+exports.userLogout = functions.https.onCall((data, context) => {
+    const deviceID = data.deviceID;
+    const uid = conext.auth.uid;
+
+    var userNotifIDs = db.collection('userNotificationIDs').doc(uid);
+    userNotifIDs.update({
+        deviceID: firebase.firestore.FieldValue.delete();
+    });
+
+
+
 
 });
