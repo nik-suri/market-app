@@ -6,16 +6,9 @@ const db = admin.firestore();
 // Add new user to database
 exports.newUser = functions.auth.user().onCreate(user => {
   const userData = JSON.parse(JSON.stringify(user));
+  userData.groups = [];
   console.log(userData);
   return db.collection('users').doc(user.uid).set(userData);
-});
-
-// Add User Notification Token
-exports.addRegistrationToken = functions.https.onCall((data, context) => {
-  const token = data.token;
-  const uid = context.auth.uid;
-  //db.collection('users').doc(uid).update({
-  //});
 });
 
 // Save Device ID
@@ -25,11 +18,10 @@ exports.userLogin = functions.https.onCall((data, context) => {
   const uid = context.auth.uid;
   const date = (new Date()).toISOString();
 
-    db.collection('userNotifcationIDs').doc(uid).update({
-        deviceID: {
-            "OS": deviceOS,
-            "date": date
-        }
-    })
-
+  db.collection('userNotifcationIDs').doc(uid).update({
+    deviceID: {
+      "OS": deviceOS,
+      "date": date
+    }
+  })
 });
