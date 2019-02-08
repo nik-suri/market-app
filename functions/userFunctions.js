@@ -1,14 +1,11 @@
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-
-admin.initializeApp(functions.config().firebase);
-
-const db = admin.firestore();
+const db = require('./setup.js');
 
 // Add new user to database
 exports.newUser = functions.auth.user().onCreate(user => {
-  console.log(user);
-  return db.collection('users').doc(user.uid).set(user.toJSON());
+  const userData = JSON.parse(JSON.stringify(user));
+  console.log(userData);
+  return db.collection('users').doc(user.uid).set(userData);
 });
 
 // Add User Notification Token
