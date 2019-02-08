@@ -13,8 +13,14 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
 });
 
 exports.newUser = functions.auth.user().onCreate(user => {
-  console.log(user);
-  return db.collection('users').doc(user.uid).set(user.toJSON());
+  const userData = JSON.parse(JSON.stringify(user));
+  console.log(userData);
+  return db.collection('users').doc(user.uid).set(userData);
+});
+
+exports.userLogin = functions.https.onCall((data, context) => {
+  const uid = context.auth.uid;
+  const timestamp = data.timestamp;
 });
 
 exports.addRegistrationToken = functions.https.onCall((data, context) => {
