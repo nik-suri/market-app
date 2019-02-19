@@ -20,7 +20,7 @@ exports.userLogin = functions.https.onCall((data, context) => {
 
   console.log(deviceID, deviceOS, uid, date);
   const setter = db.collection('userNotificationIDs').doc(uid).set({
-    deviceID: {
+    [deviceID]: {
       OS: deviceOS,
       date: date
     }
