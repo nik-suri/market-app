@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 const db = admin.firestore();
 
@@ -24,16 +25,16 @@ exports.userLogin = functions.https.onCall((data, context) => {
       OS: deviceOS,
       date: date
     }
-  });
-  console.log(setter);
+  }, {merge: true})
+    .then(() => console.log("Notification ID write succeeded"));
 });
 
 exports.userLogout = functions.https.onCall((data, context) => {
   const deviceID = data.deviceID;
-  const uid = conext.auth.uid;
+  const uid = context.auth.uid;
 
   var userNotifIDs = db.collection('userNotificationIDs').doc(uid);
-  userNotifIDs.update({
-    deviceID: firebase.firestore.FieldValue.delete()
-  });
+  return userNotifIDs.update({
+    [deviceID]: FieldValue.delete()
+  }).then(() => console.log("Notification ID delete succeeded"));
 });
