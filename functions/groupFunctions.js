@@ -41,6 +41,6 @@ exports.getGroups = functions.https.onCall((data, context) => {
   const groupsRef = db.collection('groups');
   return db.collection('groups')
     .where('creator', '==', uid)
-    .where('participants', 'array-contains', uid)
+    .where('participants', 'array-contains', uid).get()
     .then(snapshot => snapshot);
 });
