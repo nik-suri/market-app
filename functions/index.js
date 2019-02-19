@@ -6,9 +6,10 @@ admin.initializeApp(functions.config().firebase);
 const userFunctions = require('./userFunctions');
 const groupFunctions = require('./groupFunctions');
 
-//User Functions
+// User Functions
 exports.newUser = userFunctions.newUser;
 exports.userLogin = userFunctions.userLogin;
 exports.userLogout = userFunctions.userLogout;
 
+// group functions
 exports.createGroup = groupFunctions.createGroup;
