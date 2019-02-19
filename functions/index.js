@@ -13,3 +13,4 @@ exports.userLogout = userFunctions.userLogout;
 
 // group functions
 exports.createGroup = groupFunctions.createGroup;
+exports.getGroups = groupFunctions.getGroups;

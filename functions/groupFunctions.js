@@ -32,7 +32,6 @@ exports.createGroup = functions.https.onCall((data, context) => {
     .then(() => console.log("Batch write succeeded"))
     .catch(err => console.log("Error batch writing documents", err));
 
-  // return group info to the client
   return groupRef;
 });
 
@@ -42,5 +41,6 @@ exports.getGroups = functions.https.onCall((data, context) => {
   const groupsRef = db.collection('groups');
   return db.collection('groups')
     .where('creator', '==', uid)
-    .where('participants', 'array-contains', uid);
+    .where('participants', 'array-contains', uid)
+    .then(snapshot => snapshot);
 });
