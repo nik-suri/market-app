@@ -18,12 +18,14 @@ exports.userLogin = functions.https.onCall((data, context) => {
   const uid = context.auth.uid;
   const date = (new Date()).toISOString();
 
-  db.collection('userNotificationIDs').doc(uid).set({
+  console.log(deviceID, deviceOS, uid, date);
+  const setter = db.collection('userNotificationIDs').doc(uid).set({
     deviceID: {
-      "OS": deviceOS,
-      "date": date
+      OS: deviceOS,
+      date: date
     }
-  })
+  });
+  console.log(setter);
 });
 
 exports.userLogout = functions.https.onCall((data, context) => {
